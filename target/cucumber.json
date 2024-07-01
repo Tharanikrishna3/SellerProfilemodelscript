@@ -1,0 +1,173 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 5265105625,
+              "status": "passed"
+            },
+            "match": {
+              "location": "Modelstepdef.beforeTest(Scenario)"
+            }
+          }
+        ],
+        "line": 21,
+        "name": "Seller profile and ipl records should be canceled when Seller is not  eligible for that period",
+        "description": "",
+        "id": "seller-profile-model--seller-level-manage-model-testing;seller-profile-and-ipl-records-should-be-canceled-when-seller-is-not--eligible-for-that-period",
+        "after": [
+          {
+            "output": [
+              "Test passed"
+            ],
+            "result": {
+              "duration": 39030708,
+              "status": "passed"
+            },
+            "match": {
+              "location": "Modelstepdef.afterRun(Scenario)"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 15159414792,
+              "status": "passed"
+            },
+            "line": 22,
+            "name": "Test data setup with this data to be deleted or updated \"UPDATE DBLFMSXR.FMSV1_O_SP_SELLER_PROFILE SET DLET_DATE \u003d\u00272024-06-30\u0027 WHERE SELLER_PROFILE_ID \u003d885060 AND APPR_STATUS \u003d\u0027Approved\u0027 WITH UR\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"UPDATE DBLFMSXR.FMSV1_O_SP_SELLER_PROFILE SET DLET_DATE \u003d\u00272024-06-30\u0027 WHERE SELLER_PROFILE_ID \u003d885060 AND APPR_STATUS \u003d\u0027Approved\u0027 WITH UR\"",
+                  "offset": 56
+                }
+              ],
+              "location": "Modelstepdef.dataDeleteOrUpdate(String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 7020908625,
+              "status": "passed"
+            },
+            "line": 23,
+            "name": "Test data setup with this data to be deleted or updated \"UPDATE DBLFMSXR.FMST_O_SP_SELLER_ELIG SET DLET_DATE \u003d\u00272024-03-31\u0027 WHERE SELLER_id\u003d690 AND APPR_STATUS \u003d\u0027Approved\u0027 WITH UR\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"UPDATE DBLFMSXR.FMST_O_SP_SELLER_ELIG SET DLET_DATE \u003d\u00272024-03-31\u0027 WHERE SELLER_id\u003d690 AND APPR_STATUS \u003d\u0027Approved\u0027 WITH UR\"",
+                  "offset": 56
+                }
+              ],
+              "location": "Modelstepdef.dataDeleteOrUpdate(String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 7016600959,
+              "status": "passed"
+            },
+            "line": 24,
+            "name": "Test data setup with this data to be deleted or updated \"UPDATE DBLFMSXR.FMST_O_IPL_LETTER SET APPR_STATUS \u003d\u0027Approved\u0027 WHERE SELLER_PROFILE_ID \u003d885060 AND LATEST_VER_INDC \u003d\u00271\u0027 ORDER BY CREATE_TIMESTAMP DESC LIMIT 1\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"UPDATE DBLFMSXR.FMST_O_IPL_LETTER SET APPR_STATUS \u003d\u0027Approved\u0027 WHERE SELLER_PROFILE_ID \u003d885060 AND LATEST_VER_INDC \u003d\u00271\u0027 ORDER BY CREATE_TIMESTAMP DESC LIMIT 1\"",
+                  "offset": 56
+                }
+              ],
+              "location": "Modelstepdef.dataDeleteOrUpdate(String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 243571828959,
+              "status": "passed"
+            },
+            "line": 25,
+            "name": "Triggering the Seller reconcile model through FMST_O_SP_KAFKA_MSG table",
+            "match": {
+              "location": "Modelstepdef.triggeringModel_reconcile()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 9154878917,
+              "status": "passed"
+            },
+            "line": 26,
+            "name": "Check the data populated fine or not after triggering model \"SELECT *  FROM DBLFMSXR.FMST_O_IPL_LETTER WHERE SELLER_PROFILE_ID \u003d885060 AND APPR_STATUS \u003d\u0027Canceled\u0027 AND LATEST_VER_INDC \u003d\u00271\u0027 ORDER BY CREATE_TIMESTAMP DESC LIMIT 1\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"SELECT *  FROM DBLFMSXR.FMST_O_IPL_LETTER WHERE SELLER_PROFILE_ID \u003d885060 AND APPR_STATUS \u003d\u0027Canceled\u0027 AND LATEST_VER_INDC \u003d\u00271\u0027 ORDER BY CREATE_TIMESTAMP DESC LIMIT 1\"",
+                  "offset": 60
+                }
+              ],
+              "location": "Modelstepdef.checkdbSAT(String)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 9523079792,
+              "status": "passed"
+            },
+            "line": 27,
+            "name": "Check the data populated fine or not after triggering model \"SELECT * FROM DBLFMSXR.FMSV1_O_SP_SELLER_PROFILE WHERE SELLER_PROFILE_ID \u003d885060  AND APPR_STATUS LIKE \u0027%Canceled%\u0027 WITH UR\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"SELECT * FROM DBLFMSXR.FMSV1_O_SP_SELLER_PROFILE WHERE SELLER_PROFILE_ID \u003d885060  AND APPR_STATUS LIKE \u0027%Canceled%\u0027 WITH UR\"",
+                  "offset": 60
+                }
+              ],
+              "location": "Modelstepdef.checkdbSAT(String)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 9463892667,
+              "status": "passed"
+            },
+            "line": 28,
+            "name": "Test data setup with this data to be deleted or updated \"UPDATE DBLFMSXR.FMST_O_SP_SELLER_ELIG SET DLET_DATE \u003dNULL WHERE SELLER_id\u003d690 AND APPR_STATUS \u003d\u0027Approved\u0027 WITH UR\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"UPDATE DBLFMSXR.FMST_O_SP_SELLER_ELIG SET DLET_DATE \u003dNULL WHERE SELLER_id\u003d690 AND APPR_STATUS \u003d\u0027Approved\u0027 WITH UR\"",
+                  "offset": 56
+                }
+              ],
+              "location": "Modelstepdef.dataDeleteOrUpdate(String)"
+            },
+            "keyword": "Given "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Scenario3SellerReconcilemodel"
+          }
+        ]
+      }
+    ],
+    "name": "Seller Profile model -Seller Level Manage model Testing",
+    "description": "",
+    "id": "seller-profile-model--seller-level-manage-model-testing",
+    "keyword": "Feature",
+    "uri": "file:src/test/java/Sellerprofilemodels/SellerReconcileModel.feature",
+    "tags": []
+  }
+]
